@@ -66,7 +66,7 @@ while human_player.life_points > 0 && (player1.life_points > 0 || player2.life_p
     end
   end
   puts
-  puts "Press Enter to keep on fighting." #require player input to display fighting menu again.
+  puts "Press Enter to end turn." #require player input to display fighting menu again.
   gets.chomp
 end
   puts "Fight is over."
