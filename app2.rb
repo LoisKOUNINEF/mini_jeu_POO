@@ -4,10 +4,10 @@ Bundler.require
 require_relative 'lib/game'
 require_relative 'lib/player'
 
-puts "#"*40
+puts "#"*37
 puts "| Welcome in my 101 fighting game ! |"
 puts "| Last player standing wins !       |"
-puts "#"*40
+puts "#"*37
 
 puts "Let's create your own fighter."
 puts "What's your fighter's name ?"
@@ -15,15 +15,19 @@ print ">"
 human_player = gets.chomp
 human_player = HumanPlayer.new(human_player)
 
+#initiate and fill enemies array
 enemies = []
 player1 = Player.new("Pepito")
 enemies << player1
 player2 = Player.new("Pepita")
 enemies << player2
 
+#fighting loop
 while human_player.life_points > 0 && (player1.life_points > 0 || player2.life_points > 0)
-  #human_player.show_state
-
+  puts
+  human_player.show_state
+#display menu
+  puts
   puts "What will you do this turn?"
   puts
   puts "a - Look for a better weapon."
@@ -34,32 +38,41 @@ while human_player.life_points > 0 && (player1.life_points > 0 || player2.life_p
   puts "1 - Attack #{player2.name} with #{player2.life_points} HP."
   puts
 
+#gets player input
+  print ">"
   action = gets.chomp
-  if action == "a"
-    human_player.search_weapon
-  elsif action == "h"
-    human_player.search_health_pack
-  elsif action == "0"
-    human_player.attacks(player1)
-  elsif action == "1"
-    human_player.attacks(player2)
+  puts
+#carry out player's action
+  case action
+    when  "a"
+      human_player.search_weapon
+    when  "h"
+      human_player.search_health_pack
+    when  "0"
+      human_player.attacks(player1)
+    when  "1"
+      human_player.attacks(player2)
+    else puts "Bad move. You lost your turn."
   end
 
+  puts
   puts "Enemies strike back !"
-  enemies.each do |player|
-    if player.life_points > 0
-      player.attacks(human_player)
-    else puts "#{player.name} is dead."
+    enemies.each do |player|
+      if player.life_points > 0
+        player.attacks(human_player)
+      else puts "#{player.name} is dead."
     end
   end
-
+  puts
+  puts "Press Enter to keep on fighting." #require player input to display fighting menu again.
+  gets.chomp
+end
+  puts "Fight is over."
+  if human_player.life_points > 0
+    puts "Nailed it. What an amazing fighter !"
+  else
+    puts "You lose."
+    puts "Even with 100 HPs, powerful weapons and health packs all around you ?"
+    puts "Shame on you."
 end
 
-puts "Fight is over."
-if human_player.life_points > 0
-  puts "Nailed it. What an amazing fighter !"
-else
-  puts "You lose."
-  puts "Even with 100 HPs, powerful weapons and health packs all around you ?"
-  puts "Shame on you."
-end

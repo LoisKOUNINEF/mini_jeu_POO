@@ -23,7 +23,6 @@ class Player
     puts "Player #{@name} attacks player #{player.name}."
     puts "Attack inflicts #{damage_taken} damage points."
     player.gets_damage(damage_taken)
-    player.show_state
   end
 
   def compute_damage
