@@ -14,7 +14,7 @@ class Player
     @life_points = @life_points - damage_taken
     if @life_points <= 0
       puts "Player #{@name} has been defeated !"
-      puts "#"*20
+      puts
     end
   end
 
