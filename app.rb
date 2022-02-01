@@ -16,7 +16,7 @@ while player1.life_points > 0 && player2.life_points > 0
   puts "Let's fight !"
   puts
   player1.attacks(player2)
-  if player2.life_points <=0 then break end
+  break if player2.life_points <=0
   player2.attacks(player1)
   puts
 end

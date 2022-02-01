@@ -37,13 +37,13 @@ class HumanPlayer < Player
   attr_accessor :weapon_level
 
   def initialize(name)
+    @name = name
     @weapon_level = 1
     @life_points = 100
-    super(name)
   end
 
   def show_state
-    puts "#{@name} has #{@life_points} HP and a level #{@weapon-level} weapon."
+    puts "#{@name} has #{@life_points} HP and a level #{@weapon_level} weapon."
   end
 
   def compute_damage
@@ -53,10 +53,10 @@ class HumanPlayer < Player
   def search_weapon
     weapon_random = rand(1..6)
     puts "You found a level #{weapon_random} weapon."
-    if @weapon_level < weapon_random
+    if weapon_random > @weapon_level
+      @weapon_level = weapon_random
       puts "This weapon is better than your actual one. You keep it (obviously)."
-      @weapon_level = weapon_level
-    else
+      else
       puts "This weapon isn't that good. You discard it."
     end
   end
@@ -67,18 +67,17 @@ class HumanPlayer < Player
     when 1
       puts "You found nothing."
     when 2..5
-      if @life_points + 50 > 100
-        then @life_points = 100
-      else @life_points += 50
+      if @life_points <= 50
+        @life_points = @life_points + 50
+      else @life_points = 100
         puts "You found a Regular Health Pack. You gain +50HP."
       end
     when 6
-      if @life_points + 80 > 100
-        then @life_points = 100
-      else @life_points += 80
+      if @life_points <= 20
+        @life_points = @life_points + 80
+      else @life_points = 100
         puts "You found a Mega Health Pack. You gain +80HP."
       end
     end
   end
 end
-
