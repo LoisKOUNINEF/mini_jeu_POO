@@ -22,3 +22,5 @@ while player1.life_points > 0 && player2.life_points > 0
   player2.attacks(player1)
   puts "#"*20
 end
+
+binding.pry
