@@ -4,12 +4,14 @@ Bundler.require
 require_relative 'lib/game'
 require_relative 'lib/player'
 
+puts
 puts "#"*37
 puts "| Welcome in my 101 fighting game ! |"
 puts "| Last player standing wins !       |"
 puts "#"*37
 
-puts "Let's create your own fighter."
+puts
+puts "Let's create your fighter."
 puts "What's your fighter's name ?"
 print ">"
 human_player = gets.chomp
