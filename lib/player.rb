@@ -1,9 +1,10 @@
 class Player
-  attr_accessor :name, :life_points
+  attr_accessor :name, :life_points, :weapon_level
 
-  def initialize(name)
+  def initialize(name, weapon_level)
     @name = name
     @life_points = 10
+    @weapon_level = weapon_level
   end
 
   def show_state
@@ -26,7 +27,7 @@ class Player
   end
 
   def compute_damage
-    return rand(1..6)
+    return rand(1..6) * @weapon_level
   end
 
 end

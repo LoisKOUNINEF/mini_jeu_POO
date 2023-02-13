@@ -1,7 +1,7 @@
 class Game
 	require_relative 'player'
 
-	attr_accessor :human_player, :enemies, :enemies_number
+	attr_accessor :human_player, :enemies, :enemies_number, :difficulty
 
 	def welcome_message
 		system("clear")
@@ -35,13 +35,33 @@ class Game
 		end
 	end
 
+	def get_difficulty
+		puts "How hard will it be ? From 1 to 5."
+		print ">"
+	  difficulty = gets.chomp
+	  case difficulty
+	    when  "1"
+	      @difficulty = 1
+	    when  "2"
+				@difficulty = 2    
+			when  "3"
+	      @difficulty = 3
+	    when  "4"
+	      @difficulty = 4
+	    when  "5"
+	      @difficulty = 5
+	    else puts "default difficulty to 2"
+	    	@difficulty = 2
+	  end
+	end
+
 	def initialize_enemies
 		enemiesNames = ["Pepito", "Pepita", "Fluffy", "Sauron", "Voldemort", "Gandalf", "Luke", "Bobo", "Bibi", "Kiki", "Koko", "Timmy", "Struppi", "Haddock", "Me", "Myself", "LackOfImagination", "Funny", "Alf", "Jimmy", "Billy", "Cartman", "McKey", "MrSlave", "SpongeBob"]
 		@enemies = []
 
 		enemies_number.times do |i|
 			playerName = enemiesNames.sample
-			@enemies << Player.new(playerName)
+			@enemies << Player.new(playerName, @difficulty)
 			enemiesNames.delete(playerName)
 		end
 	end
@@ -49,16 +69,32 @@ class Game
 	def show_enemies
 		puts"You will have to defeat following enemies :"
 		enemies.each_with_index do |enemy, i|
-			puts "Enemy #{i+1} : #{enemy.name}"
+			puts "Enemy #{i+1}: #{enemy.name}, weapon level: #{enemy.weapon_level}"
 		end
 	end
 
-	def perform
+	def kill_player
+	end
+
+	def is_still_ongoing
+	end
+
+	def show_players
+		enemies.each_with_index do |enemy, i|
+			puts "Enemy #{i+1} : #{enemy.name}, #{enemy.life_points}"
+		end
+	end
+
+	def initialize
 		welcome_message
 		get_player_name
 		get_enemies_number
+		get_difficulty
 		initialize_enemies
 		show_enemies
+	end
+
+	def gameplay
 	end
 
 end
