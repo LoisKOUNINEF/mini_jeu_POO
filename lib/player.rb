@@ -1,10 +1,10 @@
 class Player
   attr_accessor :name, :life_points, :weapon_level
 
-  def initialize(name, weapon_level)
+  def initialize(name, difficulty)
     @name = name
-    @life_points = 10
-    @weapon_level = weapon_level
+    @life_points = rand(10..15) * difficulty
+    @weapon_level = rand(1..3) * difficulty
   end
 
   def show_state

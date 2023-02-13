@@ -7,4 +7,4 @@ require_relative 'lib/inputs'
 
 input = Inputs.new
 game = Game.new
-game.show_players(input.enemies)
+game.gameplay(input.human_player, input.enemies)

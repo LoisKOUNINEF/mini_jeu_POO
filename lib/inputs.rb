@@ -18,7 +18,7 @@ class Inputs
 		puts "What's your fighter's name ?"
 		print ">"
 		human_player_name = gets.chomp
-		@human_player = HumanPlayer.new(human_player_name)
+		return @human_player = HumanPlayer.new(human_player_name)
 	end
 
 	def get_enemies_number
@@ -36,7 +36,7 @@ class Inputs
 	end
 
 	def get_difficulty
-		puts "How hard will it be ? From 1 to 5."
+		puts "How hard will it be ? From 1 to 3."
 		print ">"
 	  difficulty = gets.chomp
 	  case difficulty
@@ -46,10 +46,6 @@ class Inputs
 				@difficulty = 2    
 			when  "3"
 	      @difficulty = 3
-	    when  "4"
-	      @difficulty = 4
-	    when  "5"
-	      @difficulty = 5
 	    else puts "default difficulty to 2"
 	    	@difficulty = 2
 	  end
@@ -73,7 +69,6 @@ class Inputs
 		get_enemies_number
 		get_difficulty
 		initialize_enemies
-		show_enemies
 	end
 
 end
