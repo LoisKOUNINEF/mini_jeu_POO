@@ -35,13 +35,45 @@ class Game
 		end
 	end
 
-	def kill_player
+	def enemies_attack(human_player, enemies)
+		puts
+	  puts "Enemies strike back !"
+	  enemies.each do |enemy|
+	    if (enemy.life_points > 0)
+	      then enemy.attacks(human_player)
+	    else puts "#{enemy.name} is dead."
+	    end
+	  end
 	end
 
-	def is_still_ongoing
+	# def kill_player
+	# end
+
+	def is_still_ongoing(human_player, enemies)
 		while (human_player.life_points > 0 && enemies.length > 0)
-  	show_players
+  	gameloop(human_player, enemies) 
   	end
+  	return gameover(human_player)
+	end
+
+	def gameover(human_player)
+		puts "Fight is over."
+	  if (human_player.life_points > 0)
+	    then puts "Nailed it. What an amazing fighter !"
+	  else
+	    puts "You lose."
+	    puts "Even with 100 HPs, powerful weapons and health packs all around you ?"
+	    puts "Shame on you."
+	  end
+	end
+
+	def gameloop(human_player, enemies)
+			player_action(human_player, enemies)
+			enemies_attack(human_player, enemies)
+			show_players(human_player, enemies)
+			puts
+		  puts "Press Enter to end turn."
+		  gets.chomp
 	end
 	
 	def show_players(human_player, enemies)
@@ -52,29 +84,7 @@ class Game
 	end
 
 	def gameplay(human_player, enemies)
-		show_players(human_player, enemies)
-		player_action(human_player, enemies)
+		is_still_ongoing(human_player, enemies)
 	end
-
 end
   
-
-#   puts
-#   puts "Enemies strike back !"
-#     enemies.each do |player|
-#       if player.life_points > 0
-#         player.attacks(human_player)
-#       else puts "#{player.name} is dead."
-#     end
-#   end
-#   puts
-#   puts "Press Enter to end turn." #require player input to display fighting menu again.
-#   gets.chomp
-# end
-#   puts "Fight is over."
-#   if human_player.life_points > 0
-#     puts "Nailed it. What an amazing fighter !"
-#   else
-#     puts "You lose."
-#     puts "Even with 100 HPs, powerful weapons and health packs all around you ?"
-#     puts "Shame on you."
